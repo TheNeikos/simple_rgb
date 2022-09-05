@@ -1,0 +1,22 @@
+[package]
+name = "simple_rgb"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# Fix until esp32c3-hal fixes this 
+paste = "=1.0.8"
+esp-backtrace = { version = "0.2.0", features = [
+    "esp32c3",
+    "panic-handler",
+    "exception-handler",
+    "print-uart",
+] }
+esp32c3-hal = { version = "0.1.0", features = [
+    "rt",
+    "smartled"
+] }
+riscv-rt = "0.9.0"
+smart-leds = "0.3.0"
