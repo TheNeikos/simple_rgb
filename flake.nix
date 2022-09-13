@@ -105,12 +105,14 @@
                     owner = "espressif";
                     repo = "esp-idf";
                   in
-                  builtins.fetchGit {
+                  pkgs.fetchgit {
                     url = "https://github.com/${owner}/${repo}.git";
-                    ref = "v4.4.1";
+                    # ref = "v4.4.1";
                     rev = "1329b19fe494500aeb79d19b27cfd99b40c37aec"; # v4.4.1
-                    allRefs = true;
-                    submodules = true;
+                    sha256 = "sha256-6CDW7ZyilczWpZ8e1FloF9Dd7Tl8FsBli9xFeOdLFyU=";
+                    deepClone = true;
+                    fetchSubmodules = true;
+                    leaveDotGit = true;
                   };
                 installPhase = oldAttrs.installPhase + ''
                   cp -r $src/.git $out/.git
