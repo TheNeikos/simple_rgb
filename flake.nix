@@ -89,6 +89,8 @@
       in
       {
         devShell = pkgs.mkShell {
+          LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+          IDF_MAINTAINER = "yes";
           nativeBuildInputs = [
             rust
             espflash
@@ -97,20 +99,21 @@
             pkgs.python39Packages.pip
             pkgs.python39Packages.virtualenv
             pkgs.cargo-edit
-            pkgs.gcc-riscv32-esp32c3-elf-bin
+            (pkgs.gcc-riscv32-esp32c3-elf-bin.override {
+              version = "2021r2-patch4";
+              hash = "sha256-zTSL2fZJUxqUsAlOv2B5y7mDA79de5tv8HWPRqR7gRc=";
+            })
             (pkgs.esp-idf.overrideAttrs (oldAttrs:
               rec {
                 src =
                   let
-                    owner = "espressif";
+                    owner = "TheNeikos";
                     repo = "esp-idf";
                   in
                   pkgs.fetchgit {
                     url = "https://github.com/${owner}/${repo}.git";
-                    # ref = "v4.4.1";
-                    rev = "1329b19fe494500aeb79d19b27cfd99b40c37aec"; # v4.4.1
-                    sha256 = "sha256-6CDW7ZyilczWpZ8e1FloF9Dd7Tl8FsBli9xFeOdLFyU=";
-                    deepClone = true;
+                    rev = "93ce41a98a258bc4a120500c8d21a92fc33c7130"; # Custom fork
+                    sha256 = "sha256-xeMqtsHFQ8XOmhPHlqbuJg+3hEFL3x1n8McZbnqCFHw=";
                     fetchSubmodules = true;
                     leaveDotGit = true;
                   };
