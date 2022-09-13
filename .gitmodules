@@ -1,0 +1,3 @@
+[submodule "espressif-trainings"]
+	path = espressif-trainings
+	url = https://github.com/ferrous-systems/espressif-trainings.git
