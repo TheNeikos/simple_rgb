@@ -54,6 +54,24 @@
           nativeBuildInputs = [ pkgs.pkg-config ];
           buildInputs = [ pkgs.udev ];
         };
+        espmonitor = rustPlatform.buildRustPackage rec {
+          pname = "espmonitor";
+          version = "0.10.0";
+
+          src = pkgs.fetchFromGitHub {
+            owner = "esp-rs";
+            repo = pname;
+            rev = "v${version}";
+            hash = "sha256-hWFdim84L2FfG6p9sEf+G5Uq4yhp5kv1ZMdk4sMHa+4=";
+          };
+
+          cargoSha256 = "sha256-d0tN6NZiAd+RkRy941fIaVEw/moz6tkpL0rN8TZew3g=";
+
+          doCheck = false;
+
+          nativeBuildInputs = [ pkgs.pkg-config ];
+          buildInputs = [ pkgs.udev ];
+        };
         ldproxy = rustPlatform.buildRustPackage rec {
           pname = "ldproxy";
           version = "0.3.2";
@@ -88,6 +106,7 @@
           nativeBuildInputs = [
             rust
             espflash
+            espmonitor
             ldproxy
           ];
         };
